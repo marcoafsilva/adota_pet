@@ -1,4 +1,5 @@
 import 'package:adota_pet/helpers/redirect.dart';
+import 'package:adota_pet/models/animal.dart';
 import 'package:adota_pet/views/details_page.dart';
 import 'package:adota_pet/widgets/boxed_container.dart';
 import 'package:adota_pet/widgets/carousel_item.dart';
@@ -94,28 +95,29 @@ class _RootPageState extends State<RootPage> {
         BoxedContainer(
           title: 'Animais:', 
           content: _getAnimals(),
-          btnAction: () => Redirect.popUp(context, DetailsPage.routeName),
+          btnAction: () => Redirect.popUp(context, new DetailsPage()),
         ),
       ],
     );
   }
 
   CarouselSlider _getAnimals() {
-    var teste = [
-      {
-        'title' : 'Pitoco',
-        'img'   : 'https://love.doghero.com.br/wp-content/uploads/2018/12/golden-retriever-1.png',
-        'age'   : '5',
-        'city'  : 'Mogi Guaçu',
-        'state' : 'SP'
-      },
-      {
-        'title' : 'Estopinha',
-        'img'   : 'http://haloanimalshelter.co.za/wp-content/uploads/2017/10/Cute-Dog-Photography.jpg',
-        'age'   : '5',
-        'city'  : 'Mogi Mirim',
-        'state' : 'SP'
-      }
+    
+    final animalsCarouselList = <Animal>[
+      new Animal(
+        title : 'Pitoco',
+        img   : 'https://love.doghero.com.br/wp-content/uploads/2018/12/golden-retriever-1.png',
+        age   : '5',
+        city  : 'Mogi Guaçu',
+        state : 'SP'
+      ),
+      new Animal(
+        title : 'Estopinha',
+        img   : 'http://haloanimalshelter.co.za/wp-content/uploads/2017/10/Cute-Dog-Photography.jpg',
+        age   : '5',
+        city  : 'Mogi Mirim',
+        state : 'SP'
+      )
     ];
 
     return CarouselSlider(
@@ -123,19 +125,15 @@ class _RootPageState extends State<RootPage> {
       autoPlayInterval: Duration(seconds: 4),
       // enlargeCenterPage: true,
       height: 180.0,
-      items: teste.map((i) {
+      items: animalsCarouselList.map((animal) {
         return Builder(
           builder: (BuildContext context) {
             return GestureDetector(
               child: CarouselItem(
-                title: i['title'],
-                img: i['img'],
-                age: i['age'],
-                city: i['city'],
-                state: i['state']
+                animal: animal,
               ),
               onTap: () {
-                Redirect.popUp(context, DetailsPage.routeName);
+                Redirect.popUp(context, new DetailsPage(animal : animal));
               },
             );
           },

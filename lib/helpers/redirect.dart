@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 
 class Redirect {
 
-
-  static Future popUp(context, path) {
-    return Navigator.of(context).pushNamed(path);
+  static void popUp(context, screen){
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => screen,
+      ),
+    );
   }
 }
-
-
-// Navigator.of(context).pushNamed(DetailsPage.routeName);

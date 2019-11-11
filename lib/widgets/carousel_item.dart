@@ -1,18 +1,12 @@
+import 'package:adota_pet/models/animal.dart';
 import 'package:flutter/material.dart';
 
 class CarouselItem extends StatefulWidget {
-  final String title;
-  final img;
-  final age;
-  final city;
-  final state;
+
+  final Animal animal;
 
   const CarouselItem({
-    this.title,
-    this.img,
-    this.age,
-    this.city,
-    this.state
+    this.animal
   });
 
   @override
@@ -43,7 +37,7 @@ class _CarouselItemState extends State<CarouselItem> {
                 topRight: Radius.circular(9.0)
               ),
               image: DecorationImage(
-                image: NetworkImage(widget.img),
+                image: NetworkImage(widget.animal.img),
                 fit: BoxFit.cover
               )
             ),
@@ -55,7 +49,7 @@ class _CarouselItemState extends State<CarouselItem> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  widget.title,
+                  widget.animal.title,
                   // textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.black,
@@ -64,7 +58,7 @@ class _CarouselItemState extends State<CarouselItem> {
                   ),
                 ),
                 Text(
-                  widget.city + " - " + widget.state,
+                  widget.animal.city + " - " + widget.animal.state,
                   style: TextStyle(
                     color: Colors.grey
                   ),

@@ -39,14 +39,14 @@ class _BoxedContainerState extends State<BoxedContainer> {
             ),
             Divider(),
             widget.content ?? Text(''),
-            RaisedButton(
+            widget.btnAction != null ? RaisedButton(
               color: Colors.blue,
               child: Text('Ver Todos'),
               textColor: Colors.white,
               onPressed: () {
                 widget.btnAction();
               },
-            )
+            ) : Text('')
           ],
         ),
       ),

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 // Views import
 import 'package:adota_pet/views/root_page.dart';
 
+import 'models/animal.dart';
+
 void main() {
   runApp(MyApp());
 }

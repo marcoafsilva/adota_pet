@@ -1,21 +1,22 @@
+import 'package:adota_pet/models/animal.dart';
+import 'package:adota_pet/widgets/boxed_container.dart';
 import 'package:flutter/material.dart';
+import 'package:photo_view/photo_view.dart';
 import 'package:screen/screen.dart';
 
-class DetailsPage extends StatefulWidget {
+class DetailsPage extends StatelessWidget {
+
   static const String routeName = '/details';
-  final String name;
+  final Animal animal;
 
   const DetailsPage({
-    this.name
-  });
+    Key key,
+    @required this.animal,
+  }) : super(key: key);
 
-  @override
-  _DetailsPageState createState() => _DetailsPageState();
-}
-
-class _DetailsPageState extends State<DetailsPage> {
   @override
   Widget build(BuildContext context) {
+    print("Animal details: [" + animal.toString() + "]");
     Screen.keepOn(true);
     return Scaffold(
       appBar: _buildAppBar(),
@@ -51,10 +52,24 @@ class _DetailsPageState extends State<DetailsPage> {
   Widget _animalDetails() {
     return Column(
       children: <Widget>[
-        Text('olá mundo!'),
+        BoxedContainer(
+          title: animal.title,
+          content: Column(
+            children: <Widget>[
+              GestureDetector(
+                child: Image.network(animal.img),
+                onTap: () {
+                  // PhotoView(
+                  //   imageProvider: NetworkImage(animal.img),
+                  // )
+                },
+              ),
+              Text('oi')
+            ],
+          ),
+        ),
         Text('olá mundo!', style: TextStyle( color: Colors.white ),)
       ],
     );
   }
-
 }
