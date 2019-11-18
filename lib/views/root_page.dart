@@ -1,5 +1,6 @@
 import 'package:adota_pet/helpers/redirect.dart';
 import 'package:adota_pet/models/animal.dart';
+import 'package:adota_pet/views/animals_list_page.dart';
 import 'package:adota_pet/views/details_page.dart';
 import 'package:adota_pet/widgets/boxed_container.dart';
 import 'package:adota_pet/widgets/carousel_item.dart';
@@ -95,7 +96,7 @@ class _RootPageState extends State<RootPage> {
         BoxedContainer(
           title: 'Animais:', 
           content: _getAnimals(),
-          btnAction: () => Redirect.popUp(context, new DetailsPage()),
+          btnAction: () => Redirect.popUp(context, new AnimalsListPage()),
         ),
       ],
     );

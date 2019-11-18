@@ -4,11 +4,13 @@ class BoxedContainer extends StatefulWidget {
   final String title;
   final content;
   final btnAction;
+  final btnText;
 
   const BoxedContainer({
     this.title,
     this.content,
-    this.btnAction
+    this.btnAction,
+    this.btnText
   });
 
   @override
@@ -30,7 +32,7 @@ class _BoxedContainerState extends State<BoxedContainer> {
           children: <Widget>[
             // Title
             Text(
-              widget.title,
+              widget.title ?? '',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 20.0,
@@ -41,7 +43,7 @@ class _BoxedContainerState extends State<BoxedContainer> {
             widget.content ?? Text(''),
             widget.btnAction != null ? RaisedButton(
               color: Colors.blue,
-              child: Text('Ver Todos'),
+              child: Text(widget.btnText ?? 'Ver Todos'),
               textColor: Colors.white,
               onPressed: () {
                 widget.btnAction();

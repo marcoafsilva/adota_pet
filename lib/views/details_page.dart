@@ -16,7 +16,6 @@ class DetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("Animal details: [" + animal.toString() + "]");
     Screen.keepOn(true);
     return Scaffold(
       appBar: _buildAppBar(),
@@ -64,11 +63,51 @@ class DetailsPage extends StatelessWidget {
                   // )
                 },
               ),
-              Text('oi')
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 16.0),
+                child: Column(
+                   
+                  children: <Widget>[
+                    _rowInfo('Cidade', animal.city + ' - ' + animal.state),
+                    _rowInfo('Idade', animal.age + ' meses'),
+                    Divider(),
+                    RaisedButton(
+                      color: Colors.blueAccent,
+                      child: Text('Ver no mapa', style: TextStyle(color: Colors.white),),
+                      onPressed: () {
+
+                      },
+                    )
+                  ],
+                ),
+              )
             ],
           ),
         ),
         Text('olá mundo!', style: TextStyle( color: Colors.white ),)
+      ],
+    );
+  }
+
+  Widget _rowInfo(element, value) {
+    return Row(
+      children: <Widget>[
+        Text(
+          element + ': ',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 16.0
+          ),
+
+        ),
+        Text(
+          value,
+          style: TextStyle(
+            color: Colors.grey,
+            fontSize: 16.0
+          ),
+
+        )
       ],
     );
   }
