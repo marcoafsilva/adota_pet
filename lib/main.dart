@@ -1,3 +1,4 @@
+import 'package:adota_pet/helpers/animals_data_example.dart';
 import 'package:adota_pet/views/animals_list_page.dart';
 import 'package:adota_pet/views/details_page.dart';
 import 'package:adota_pet/views/sign_in_page.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         AnimalsListPage.routeName: (context) => new AnimalsListPage()
       },
       home: RootPage(),
+      // home: DetailsPage(animal: animalsCarouselList[0],),
     );
   }
 }

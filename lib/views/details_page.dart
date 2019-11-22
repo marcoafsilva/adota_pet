@@ -1,13 +1,14 @@
-import 'package:adota_pet/models/animal.dart';
+// import 'package:adota_pet/models/animal.dart';
 import 'package:adota_pet/widgets/boxed_container.dart';
 import 'package:flutter/material.dart';
-import 'package:photo_view/photo_view.dart';
+// import 'package:photo_view/photo_view.dart';
 import 'package:screen/screen.dart';
 
 class DetailsPage extends StatelessWidget {
 
   static const String routeName = '/details';
-  final Animal animal;
+  // final Animal animal;
+  final animal;
 
   const DetailsPage({
     Key key,
