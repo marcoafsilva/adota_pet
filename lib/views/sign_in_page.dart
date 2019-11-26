@@ -1,6 +1,5 @@
-import 'package:adota_pet/views/default_scaffold.dart';
-import 'package:adota_pet/widgets/boxed_container.dart';
-import 'package:adota_pet/widgets/my_container.dart';
+import 'package:adota_pet/helpers/buttons.dart';
+import 'package:adota_pet/widgets/default_page.dart';
 import 'package:adota_pet/widgets/text_input_field.dart';
 import 'package:flutter/material.dart';
 
@@ -20,28 +19,37 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultScaffold.view('Login', MyContainer(body: _bodyBuilder()));
-  }
-
-  Widget _bodyBuilder() {
-    return Column(
-      children: <Widget>[
-        BoxedContainer(
-          title: 'Fazer login',
-          content: _body(),
-          btnAction: () => _submitBtnAction(),
-          btnText: 'Entrar',
-        )
+    return DefaultPage(
+      title: 'Login',
+      elements: <Widget>[
+        _body()
       ],
     );
   }
 
   Widget _body() {
-    return Column(
-      children: <Widget>[
-        _loginField(),
-        _passwordField(),
-      ],
+    return Card(
+      color: Colors.white,
+      margin: EdgeInsets.symmetric(horizontal: 20.0),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20.0)
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          children: <Widget>[
+            _loginField(),
+            SizedBox(height: 10.0),
+            _passwordField(),
+            SizedBox(height: 10.0),
+            ButtonsHelper.roundedBtn(
+              label: 'Entrar',
+              fontSize: 20.0
+            )
+            // _submitBtnAction(),  
+          ],
+        ),
+      ),
     );
   }
 

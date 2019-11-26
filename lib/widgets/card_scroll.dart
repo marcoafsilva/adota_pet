@@ -59,6 +59,7 @@ class CardScrollWidget extends StatelessWidget {
           
           return Stack(
             children: cardList,
+            overflow: Overflow.clip,
           );
         },
       ),

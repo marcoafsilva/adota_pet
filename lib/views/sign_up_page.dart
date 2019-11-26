@@ -1,5 +1,7 @@
+import 'package:adota_pet/helpers/buttons.dart';
 import 'package:adota_pet/views/default_scaffold.dart';
 import 'package:adota_pet/widgets/boxed_container.dart';
+import 'package:adota_pet/widgets/default_page.dart';
 import 'package:adota_pet/widgets/my_container.dart';
 import 'package:adota_pet/widgets/text_input_field.dart';
 import 'package:dropdownfield/dropdownfield.dart';
@@ -35,31 +37,51 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultScaffold.view('Novo Cadastro', MyContainer(body: _bodyBuilder()));
-  }
-
-  Widget _bodyBuilder() {
-    return BoxedContainer(
-      title: 'Novo Cadastro',
-      content: _body(),
-      btnText: 'Cadastrar!',
-      btnAction: () => _submitBtnAction(),
+    return DefaultPage(
+      title: 'Cadastre-se',
+      elements: <Widget>[
+        _body(),
+        SizedBox(height: 50.0,)
+      ],
     );
   }
 
   Widget _body() {
-    return Column(
-      children: <Widget>[
-        _nameField(),
-        _phoneField(),
-        _stateField(),
-        _cityField(),
-        _mailField(),
-        _passwordField(),
-        
-      ],
+    return Card(
+      color: Colors.white,
+      margin: EdgeInsets.symmetric(horizontal: 20.0),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20.0)
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          children: <Widget>[
+            _nameField(),
+            SizedBox(height: 10.0),
+            _phoneField(),
+            SizedBox(height: 10.0),
+            _stateField(),
+            SizedBox(height: 10.0),
+            _cityField(),
+            SizedBox(height: 10.0),
+            _mailField(),
+            SizedBox(height: 10.0),
+            _passwordField(),
+            SizedBox(height: 10.0),
+            _passwordField(),
+            SizedBox(height: 10.0),
+            ButtonsHelper.roundedBtn(
+              label: 'Cadastrar!',
+              fontSize: 20.0
+            ),
+            // _submitBtnAction(),  
+          ],
+        ),
+      ),
     );
   }
+
 
   Widget _nameField() {
     return TextInputField(

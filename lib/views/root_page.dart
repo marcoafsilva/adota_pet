@@ -38,7 +38,6 @@ class _RootPageState extends State<RootPage> {
       });
     });    
 
-    Screen.keepOn(true);
 
     var widgetsList = <Widget> [
       _trending(),

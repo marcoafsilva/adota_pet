@@ -19,7 +19,13 @@ class _TextInputFieldState extends State<TextInputField> {
   Widget build(BuildContext context) {
     return TextFormField(
       decoration: InputDecoration(
-        labelText: widget.label
+        labelText: widget.label,
+        border: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Color.fromRGBO(0, 0, 0, 0),
+          ),
+          borderRadius: BorderRadius.circular(50.0)
+        )
       ),
       controller: widget.controller,
       autofocus: false,
