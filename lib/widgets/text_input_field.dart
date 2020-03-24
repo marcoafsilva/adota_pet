@@ -19,6 +19,10 @@ class _TextInputFieldState extends State<TextInputField> {
   Widget build(BuildContext context) {
     return TextFormField(
       decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(
+          vertical: 20.0,
+          horizontal: 25.0,
+        ),
         labelText: widget.label,
         border: OutlineInputBorder(
           borderSide: BorderSide(

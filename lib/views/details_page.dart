@@ -34,7 +34,11 @@ class DetailsPage extends StatelessWidget {
 
   Widget _animalDetails(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      padding: EdgeInsets.only(
+        left: 20.0,
+        right: 20.0,
+        bottom: 50.0
+      ),
       child: Stack(
         overflow: Overflow.clip,
         children: <Widget>[
@@ -94,22 +98,25 @@ class DetailsPage extends StatelessWidget {
                       SizedBox(height: 10.0,),
                       Divider(),
                       SizedBox(height: 10.0,),
-                      Row(
+                      Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           ButtonsHelper.roundedBtn(
                             label: 'Ver no mapa',
-                            icon: Icons.map
+                            icon: Icons.map,
+                            size: 'md'
                           ),
+                          SizedBox(height: 5.0),
                           ButtonsHelper.roundedBtn(
                             label: 'Contactar',
-                            icon: Icons.phone
+                            icon: Icons.phone,
+                            size: 'md'
                           )
                         ],
                       )
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),

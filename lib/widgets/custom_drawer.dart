@@ -48,6 +48,16 @@ class _CustomDrawerState extends State<CustomDrawer> {
     String _userMail = 'marcoaurelio.fs@hotmail.com';
 
     return UserAccountsDrawerHeader(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Color(0xFF1b1e44),
+            Color(0xFF2d3447),
+          ],
+          begin: Alignment.bottomCenter,
+          end: Alignment.topCenter,
+        )
+      ),
       accountName: Text(_userName),
       accountEmail: Text(_userMail),
       currentAccountPicture:
@@ -55,12 +65,18 @@ class _CustomDrawerState extends State<CustomDrawer> {
     );
   }
 
-  Widget _menuItem({String title, action, icon = null}) {
+  Widget _menuItem({String title, action, icon}) {
     return ListTile(
       title: Row(
         children: <Widget>[
-          icon != null ? Padding(padding: EdgeInsets.only(right: 10.0), child: Icon(icon),) : Text(''),
-          Text(title)
+          Icon(icon, color: Color(0xFF1b1e44),),
+          SizedBox(width: 10.0),
+          Text(
+            title,
+            style: TextStyle(
+              color: Color(0xFF1b1e44)
+            ),
+          )
         ],
       ),
       onTap: () => Redirect.popUp(context, action),

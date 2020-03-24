@@ -71,6 +71,8 @@ class _SignUpPageState extends State<SignUpPage> {
             SizedBox(height: 10.0),
             _passwordField(),
             SizedBox(height: 10.0),
+            Divider(),
+            SizedBox(height: 10.0),
             ButtonsHelper.roundedBtn(
               label: 'Cadastrar!',
               fontSize: 20.0

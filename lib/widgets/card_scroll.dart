@@ -1,6 +1,5 @@
 import 'package:adota_pet/helpers/animals_data_example.dart';
 import 'package:adota_pet/helpers/redirect.dart';
-import 'package:adota_pet/models/animal.dart';
 import 'package:adota_pet/views/details_page.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
@@ -101,7 +100,9 @@ class CardScrollWidget extends StatelessWidget {
                         el.title,
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 25.0
+                          fontSize: 25.0,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1.0
                         ),
                       ),
                     ),
@@ -124,7 +125,7 @@ class CardScrollWidget extends StatelessWidget {
                           '+ Informações',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 20.0,
+                            fontSize: 15.0,
                             fontWeight: FontWeight.w300
                             ),
                         ),

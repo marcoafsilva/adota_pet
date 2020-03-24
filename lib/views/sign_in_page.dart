@@ -42,6 +42,8 @@ class _SignInPageState extends State<SignInPage> {
             SizedBox(height: 10.0),
             _passwordField(),
             SizedBox(height: 10.0),
+            Divider(),
+            SizedBox(height: 10.0),
             ButtonsHelper.roundedBtn(
               label: 'Entrar',
               fontSize: 20.0

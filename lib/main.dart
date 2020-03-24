@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         AnimalsListPage.routeName: (context) => new AnimalsListPage()
       },
       home: RootPage(),
-      // home: SignUpPage(),
+      // home: DetailsPage(animal: animalsCarouselList[0],),
     );
   }
 }
