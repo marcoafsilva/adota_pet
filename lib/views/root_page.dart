@@ -52,9 +52,21 @@ class _RootPageState extends State<RootPage> {
       // Trending items
       _trending(),
       _trendingMoreInfo(),
-      _trendingCards(
-        controller: _controller,
-        currentPage: _currentPage
+      // _trendingCards(
+      //   controller: _controller,
+      //   currentPage: _currentPage
+      // ),
+      
+      _newTrending(animalsCarouselList),
+
+      Container(
+        height: 250.0,
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: <Widget>[
+            // childs
+          ],
+        ),
       ),
 
       SizedBox(height: 40.0),
@@ -75,6 +87,16 @@ class _RootPageState extends State<RootPage> {
     );
   }
   
+  Widget _newTrending(List list) {
+    return Container(
+      height: 300.0,
+      child: ListView(
+        
+      ),
+    );
+  }
+
+
   Widget _trending({String title, icon}) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.0),
