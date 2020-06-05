@@ -1,4 +1,3 @@
-import 'package:adota_pet/helpers/animals_data_example.dart';
 import 'package:adota_pet/views/animals_list_page.dart';
 import 'package:adota_pet/views/details_page.dart';
 import 'package:adota_pet/views/sign_in_page.dart';
@@ -8,8 +7,6 @@ import 'package:flutter/material.dart';
 
 // Views import
 import 'package:adota_pet/views/root_page.dart';
-
-import 'models/animal.dart';
 
 void main() {
   runApp(MyApp());

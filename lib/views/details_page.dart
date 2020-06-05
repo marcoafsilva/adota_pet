@@ -1,6 +1,7 @@
-// import 'package:adota_pet/models/animal.dart';
 import 'package:adota_pet/helpers/buttons.dart';
+import 'package:adota_pet/widgets/copyright_footer.dart';
 import 'package:adota_pet/widgets/default_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:screen/screen.dart';
 
@@ -8,11 +9,11 @@ class DetailsPage extends StatelessWidget {
 
   static const String routeName = '/details';
   // final Animal animal;
-  final animal;
+  final animalId;
 
   const DetailsPage({
     Key key,
-    @required this.animal,
+    @required this.animalId,
   }) : super(key: key);
 
   @override
@@ -21,9 +22,10 @@ class DetailsPage extends StatelessWidget {
     Screen.keepOn(true);
 
     var widgetsList = <Widget> [
-      _animalDetails(context)
+      _animalDetails(context),
+      new CopyrightFooter()
     ];
-    
+
     return DefaultPage(
       back: true,
       search: false,
@@ -33,6 +35,22 @@ class DetailsPage extends StatelessWidget {
   }
 
   Widget _animalDetails(BuildContext context) {
+
+    return new StreamBuilder(
+        stream: Firestore.instance.collection('animals').document(animalId).snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return new Text("Loading");
+          }
+
+          var animal = snapshot.data;
+          return _data(animal);
+        }
+    );
+  }
+
+
+  Widget _data(animalData) {
     return Padding(
       padding: EdgeInsets.only(
         left: 20.0,
@@ -50,7 +68,7 @@ class DetailsPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                
+
                 SizedBox(height: 250.0),
                 Padding(
                   padding: EdgeInsets.all(20.0),
@@ -59,7 +77,7 @@ class DetailsPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        animal.title,
+                        animalData['name'],
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontSize: 25.0,
@@ -74,7 +92,7 @@ class DetailsPage extends StatelessWidget {
                           Icon(Icons.cake, size: 20.0, color: Colors.grey,),
                           SizedBox(width: 5.0),
                           Text(
-                            animal.age + ' meses', 
+                            '${animalData['age']} meses',
                             style: TextStyle(
                               fontSize: 20.0
                             ),
@@ -88,7 +106,7 @@ class DetailsPage extends StatelessWidget {
                           Icon(Icons.map, size: 20.0, color: Colors.grey,),
                           SizedBox(width: 5.0),
                           Text(
-                            animal.city + ' - ' + animal.state, 
+                            animalData['city'] + ' - ' + animalData['state'],
                             style: TextStyle(
                               fontSize: 20.0
                             ),
@@ -125,15 +143,13 @@ class DetailsPage extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.0),
               image: DecorationImage(
-                image: NetworkImage(animal.img),
-                fit: BoxFit.fitHeight
+                image: NetworkImage(animalData['img']),
+                fit: BoxFit.cover
               )
             ),
-          ),  
+          ),
         ],
       ),
     );
   }
-
-
 }

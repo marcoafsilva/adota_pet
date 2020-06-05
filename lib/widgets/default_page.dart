@@ -1,6 +1,7 @@
 import 'package:adota_pet/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:screen/screen.dart';
+import 'package:adota_pet/helpers/redirect.dart';
 
 class DefaultPage extends StatefulWidget {
 
@@ -27,9 +28,8 @@ class _DefaultPageState extends State<DefaultPage> {
 
   @override
   Widget build(BuildContext context) {
-    
-    Screen.keepOn(true);
 
+    Screen.keepOn(true);
 
     widgetsList.clear();
     _populate();
@@ -74,14 +74,14 @@ class _DefaultPageState extends State<DefaultPage> {
       padding: EdgeInsets.only(
         left: 12.0,
         right: 12.0,
-        top: 30.0,
+        top: 40.0,
         bottom: 8.0
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           _menuTopBtn(),
-          _searchtopBtn(),
+          // _searchtopBtn(),
         ],
       ),
     );
@@ -95,7 +95,11 @@ class _DefaultPageState extends State<DefaultPage> {
         size: 30.0,
       ),
       onPressed: () {
-        _scaffoldKey.currentState.openDrawer();
+        if (widget.back == null) {
+          _scaffoldKey.currentState.openDrawer();
+        } else {
+          Redirect.pushUp(context);
+        }
       },
     );
   }
@@ -129,12 +133,6 @@ class _DefaultPageState extends State<DefaultPage> {
                   fontWeight: FontWeight.bold
                 ),
               ),
-              IconButton(
-                icon: Icon(Icons.info),
-                iconSize: 34.0,
-                color: Colors.white,
-                onPressed: () {},
-              )
             ],
           ),
         ),

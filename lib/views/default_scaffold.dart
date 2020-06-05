@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:screen/screen.dart';
 
 class DefaultScaffold {
-  
+
   static Widget view (String title, Widget body, [drawer = true]) {
     Screen.keepOn(true);
     return Scaffold(
@@ -14,9 +14,7 @@ class DefaultScaffold {
     );
   }
 
-  /**
-   * App Bar builder
-   */
+  // App Bar builder
   static Widget _buildAppBar(title) {
     return AppBar(
       title: Text(title),

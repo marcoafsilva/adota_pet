@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "325023761074",
+    "firebase_url": "https://adota-pet-e7ee5.firebaseio.com",
+    "project_id": "adota-pet-e7ee5",
+    "storage_bucket": "adota-pet-e7ee5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:325023761074:android:f15283c7ed61b754dcbfab",
+        "android_client_info": {
+          "package_name": "com.example.adota_pet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "325023761074-eepdj7ughho9euvd3bp0tsh9kb5fe54q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6CBTcj9vEpT-llI1e_ixvKJOsqdFwx0s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "325023761074-eepdj7ughho9euvd3bp0tsh9kb5fe54q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:325023761074:android:0986c127cb03b610dcbfab",
+        "android_client_info": {
+          "package_name": "com.marco.adota_pet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "325023761074-eepdj7ughho9euvd3bp0tsh9kb5fe54q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6CBTcj9vEpT-llI1e_ixvKJOsqdFwx0s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "325023761074-eepdj7ughho9euvd3bp0tsh9kb5fe54q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

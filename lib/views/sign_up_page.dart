@@ -1,8 +1,5 @@
 import 'package:adota_pet/helpers/buttons.dart';
-import 'package:adota_pet/views/default_scaffold.dart';
-import 'package:adota_pet/widgets/boxed_container.dart';
 import 'package:adota_pet/widgets/default_page.dart';
-import 'package:adota_pet/widgets/my_container.dart';
 import 'package:adota_pet/widgets/text_input_field.dart';
 import 'package:dropdownfield/dropdownfield.dart';
 import 'package:flutter/material.dart';
@@ -77,7 +74,7 @@ class _SignUpPageState extends State<SignUpPage> {
               label: 'Cadastrar!',
               fontSize: 20.0
             ),
-            // _submitBtnAction(),  
+            // _submitBtnAction(),
           ],
         ),
       ),

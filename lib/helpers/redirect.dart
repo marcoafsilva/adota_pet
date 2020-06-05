@@ -10,4 +10,8 @@ class Redirect {
       ),
     );
   }
+
+  static void pushUp(context) {
+    Navigator.of(context).pop(true);
+  }
 }

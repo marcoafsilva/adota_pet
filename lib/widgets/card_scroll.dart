@@ -44,7 +44,7 @@ class CardScrollWidget extends StatelessWidget {
               primaryCardLeft - horizonInset * -delta * (isOnRight ? 15 : 1),
               0.0
             );
-            
+
             var cardItem = Positioned.directional(
               top: padding + verticalInset + max(-delta, 0.0),
               bottom: padding + verticalInset * max(-delta, 0.0),
@@ -52,10 +52,10 @@ class CardScrollWidget extends StatelessWidget {
               textDirection: TextDirection.rtl,
               child: _cardBody(context, animalsCarouselList[i]),
             );
-            
+
             cardList.add(cardItem);
           }
-          
+
           return Stack(
             children: cardList,
             overflow: Overflow.clip,
@@ -142,6 +142,6 @@ class CardScrollWidget extends StatelessWidget {
   }
 
   void _cardAction(context, el) {
-    Redirect.popUp(context, new DetailsPage(animal: el));
+    // Redirect.popUp(context, new DetailsPage(animalId: el));
   }
 }
