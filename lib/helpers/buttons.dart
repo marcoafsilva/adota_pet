@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ButtonsHelper {
-  
+
   static FlatButton roundedBtn({label, action, icon, fontSize, size}) {
 
     var _horizontalPadding = 10.0;
@@ -20,7 +20,7 @@ class ButtonsHelper {
     }
 
     return FlatButton(
-      onPressed: () =>action,
+      onPressed: action,
       color: Color(0xFF1b1e44),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(50.0)

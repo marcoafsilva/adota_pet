@@ -1,4 +1,5 @@
 import 'package:adota_pet/views/animals_list_page.dart';
+import 'package:adota_pet/views/denounce_page.dart';
 import 'package:adota_pet/views/details_page.dart';
 import 'package:adota_pet/views/sign_in_page.dart';
 import 'package:adota_pet/views/sign_up_page.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 
 // Views import
 import 'package:adota_pet/views/root_page.dart';
+import 'package:adota_pet/views/publish_animal.dart';
 
 void main() {
   runApp(MyApp());
@@ -28,10 +30,12 @@ class MyApp extends StatelessWidget {
         RootPage.routeName: (context) => new RootPage(),
         SignInPage.routeName: (context) => new SignInPage(),
         SignUpPage.routeName: (context) => new SignUpPage(),
-        AnimalsListPage.routeName: (context) => new AnimalsListPage()
+        AnimalsListPage.routeName: (context) => new AnimalsListPage(),
+        PublishAnimal.routeName: (context) => new PublishAnimal(),
+        DenouncePage.routeName: (context) => new DenouncePage()
       },
       home: RootPage(),
-      // home: DetailsPage(animal: animalsCarouselList[0],),
+      // home: PublishAnimal()
     );
   }
 }

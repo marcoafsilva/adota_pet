@@ -122,13 +122,19 @@ class DetailsPage extends StatelessWidget {
                           ButtonsHelper.roundedBtn(
                             label: 'Ver no mapa',
                             icon: Icons.map,
-                            size: 'md'
+                            size: 'md',
+                            action: () => {
+
+                            }
                           ),
                           SizedBox(height: 5.0),
                           ButtonsHelper.roundedBtn(
                             label: 'Contactar',
                             icon: Icons.phone,
-                            size: 'md'
+                            size: 'md',
+                            action: () => {
+
+                            }
                           )
                         ],
                       )

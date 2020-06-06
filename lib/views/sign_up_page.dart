@@ -1,8 +1,10 @@
 import 'package:adota_pet/helpers/buttons.dart';
 import 'package:adota_pet/widgets/default_page.dart';
 import 'package:adota_pet/widgets/text_input_field.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdownfield/dropdownfield.dart';
 import 'package:flutter/material.dart';
+import 'package:masked_text/masked_text.dart';
 
 class SignUpPage extends StatefulWidget {
 
@@ -28,7 +30,10 @@ class _SignUpPageState extends State<SignUpPage> {
   List<String> cities = [
     'Campinas',
     'Mogi Guaçu',
-    'Mogi Mirim'
+    'Mogi Mirim',
+    'Itapira',
+    'Estiva Gerbi',
+    'Espírito Santo do Pinhal'
   ];
 
 
@@ -66,13 +71,39 @@ class _SignUpPageState extends State<SignUpPage> {
             SizedBox(height: 10.0),
             _passwordField(),
             SizedBox(height: 10.0),
-            _passwordField(),
-            SizedBox(height: 10.0),
             Divider(),
             SizedBox(height: 10.0),
             ButtonsHelper.roundedBtn(
               label: 'Cadastrar!',
-              fontSize: 20.0
+              fontSize: 20.0,
+              action: () => {
+                Firestore.instance.collection('users').add({
+                  'city' : 'Mogi Guaçu',
+                  'state' : 'SP',
+                  'pass' : _passwordFieldController.text,
+                  'phone' : _phoneFieldController.text,
+                  'name' : _nameFieldController.text
+                }),
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text('Sucesso!'),
+                      content: Text('Seu registro foi criado com sucesso!'),
+                      actions: [
+                        FlatButton(
+                          child: Text('OK'),
+                          onPressed: () {
+                            Navigator.of(context).pop(true);
+                            Navigator.of(context).pop(true);
+                            Navigator.of(context).pop(true);
+                          },
+                        )
+                      ],
+                    );
+                  }
+                )
+              }
             ),
             // _submitBtnAction(),
           ],
@@ -90,9 +121,24 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Widget _phoneField() {
-    return TextInputField(
-      label: 'Telefone',
-      controller: _phoneFieldController,
+    return MaskedTextField(
+      maskedTextFieldController: _phoneFieldController,
+      mask: "(xx) x.xxxx-xxxx",
+      maxLength: 16,
+      keyboardType: TextInputType.number,
+      inputDecoration: InputDecoration(
+        labelText: "Telefone",
+        border: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Color.fromRGBO(0, 0, 0, 0),
+          ),
+          borderRadius: BorderRadius.circular(50.0)
+        ),
+        contentPadding: EdgeInsets.symmetric(
+          vertical: 20.0,
+          horizontal: 25.0,
+        ),
+      ),
     );
   }
 
@@ -114,6 +160,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return TextInputField(
       label: 'E-mail',
       controller: _mailFieldController,
+
     );
   }
 
