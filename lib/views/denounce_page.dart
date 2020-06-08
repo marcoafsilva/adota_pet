@@ -1,4 +1,3 @@
-import 'dart:html';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:adota_pet/widgets/copyright_footer.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +39,7 @@ class _DenouncePageState extends State<DenouncePage> {
 
   Widget _test() {
 
-    return new PictureUploadWidget(
+    /*return new PictureUploadWidget(
       onPicturesChange: profilePictureCallback,
       initialImages: _profilePictures,
       settings: PictureUploadSettings(onErrorFunction: onErrorCallback),
@@ -48,7 +47,9 @@ class _DenouncePageState extends State<DenouncePage> {
       buttonText: 'Enviar Imagem',
       enabled: true,
     );
+    */
   }
+  /*
 
   void onErrorCallback(error, stackTrace) {
     print(error);
@@ -65,16 +66,17 @@ class _DenouncePageState extends State<DenouncePage> {
       .child('/Uploads/' + id.toString() + '_800.jpg');
 
     // start upload
-    StorageUploadTask uploadTask = imgRef.putFile(image, new StorageMetadata(contentType: 'image/jpg'));
+    // StorageUploadTask uploadTask = imgRef.putFile(image, new StorageMetadata(contentType: 'image/jpg'));
 
     // wait until upload is complete
-    await uploadTask.onComplete;
+    //await uploadTask.onComplete;
 
-    return imgRef;
+    // return imgRef;
   }
 
   Future<void> deleteProfilePicture(StorageReference oldUpload) async {
     // ask backend to transform images
     await oldUpload.delete();
   }
+  */
 }

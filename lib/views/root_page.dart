@@ -2,12 +2,14 @@ import 'package:adota_pet/helpers/redirect.dart';
 import 'package:adota_pet/views/animals_list_page.dart';
 import 'package:adota_pet/views/denounce_page.dart';
 import 'package:adota_pet/views/publish_animal.dart';
+import 'package:adota_pet/views/sign_in_page.dart';
+import 'package:adota_pet/views/sign_up_page.dart';
 import 'package:adota_pet/widgets/animal_tile.dart';
 import 'package:adota_pet/widgets/copyright_footer.dart';
 import 'package:adota_pet/widgets/default_page.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:adota_pet/helpers/globals.dart' as globals;
 
 class RootPage extends StatefulWidget {
 
@@ -123,7 +125,34 @@ class _RootPageState extends State<RootPage> {
               Icons.add,
               'Publicar',
               () {
-                Redirect.popUp(context, new PublishAnimal());
+                // Not logged in
+                if (!globals.isLoggedIn) {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Ops...'),
+                        content: Text('Faça login ou registre-se para publicar.'),
+                        actions: [
+                          FlatButton(
+                            child: Text('Login'),
+                            onPressed: () {
+                              Redirect.popUp(context, new SignInPage());
+                            },
+                          ),
+                          FlatButton(
+                            child: Text('Registre-se'),
+                            onPressed: () {
+                              Redirect.popUp(context, new SignUpPage());
+                            },
+                          )
+                        ],
+                      );
+                    }
+                  );
+                } else {
+                  Redirect.popUp(context, new PublishAnimal());
+                }
               }
             ),
             _circleBtn(

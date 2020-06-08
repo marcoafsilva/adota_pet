@@ -41,6 +41,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return DefaultPage(
       title: 'Cadastre-se',
+      back: true,
       elements: <Widget>[
         _body(),
         SizedBox(height: 50.0,)
