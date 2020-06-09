@@ -1,9 +1,8 @@
 library my_prj.globals;
 
-bool isLoggedIn;
+bool isLoggedIn = false;
 
 var userData = {
   'uid' : '',
-  'name' : '',
-  'email' : ''
+  'email' : 'Anônimo'
 };

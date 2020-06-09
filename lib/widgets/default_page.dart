@@ -1,7 +1,9 @@
 import 'package:adota_pet/widgets/custom_drawer.dart';
+import 'package:adota_pet/widgets/filter_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:screen/screen.dart';
 import 'package:adota_pet/helpers/redirect.dart';
+
 
 class DefaultPage extends StatefulWidget {
 
@@ -13,7 +15,7 @@ class DefaultPage extends StatefulWidget {
   const DefaultPage({
     this.elements,
     this.back,
-    this.search,
+    this.search = false,
     this.title
   });
 
@@ -66,6 +68,7 @@ class _DefaultPageState extends State<DefaultPage> {
         ),
       ),
       drawer: CustomDrawer(),
+      endDrawer: FilterDrawer(),
     );
   }
 
@@ -81,7 +84,7 @@ class _DefaultPageState extends State<DefaultPage> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           _menuTopBtn(),
-          // _searchtopBtn(),
+          (widget.search ? _filterBtn() : Text('')),
         ],
       ),
     );
@@ -104,14 +107,16 @@ class _DefaultPageState extends State<DefaultPage> {
     );
   }
 
-  Widget _searchtopBtn() {
+  Widget _filterBtn() {
     return IconButton(
       icon: Icon(
-        Icons.search,
+        Icons.sort,
         color: Colors.white,
         size: 30.0,
       ),
-      onPressed: () {},
+      onPressed: () {
+        _scaffoldKey.currentState.openEndDrawer();
+      },
     );
   }
 

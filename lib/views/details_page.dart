@@ -4,6 +4,7 @@ import 'package:adota_pet/widgets/default_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:screen/screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailsPage extends StatelessWidget {
 
@@ -76,68 +77,20 @@ class DetailsPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      Text(
-                        animalData['name'],
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontSize: 25.0,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 1.0,
-                        )
-                      ),
+                      _animalName(animalData['name']),
                       SizedBox(height: 10.0,),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Icon(Icons.cake, size: 20.0, color: Colors.grey,),
-                          SizedBox(width: 5.0),
-                          Text(
-                            '${animalData['age']} meses',
-                            style: TextStyle(
-                              fontSize: 20.0
-                            ),
-                          )
-                        ],
-                      ),
+                      _dataField(Icons.cake, "${animalData['age']} meses"),
                       SizedBox(height: 10.0),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Icon(Icons.map, size: 20.0, color: Colors.grey,),
-                          SizedBox(width: 5.0),
-                          Text(
-                            animalData['city'] + ' - ' + animalData['state'],
-                            style: TextStyle(
-                              fontSize: 20.0
-                            ),
-                          )
-                        ],
-                      ),
+                      _dataField(Icons.map, "${animalData['city']} - ${animalData['state']}"),
                       SizedBox(height: 10.0,),
+                      _dataField(Icons.color_lens, animalData['color']),
+                      SizedBox(height: 10.0,),
+                      _dataField(Icons.photo_size_select_small, "Porte ${animalData['size']}"),
+                      SizedBox(height: 10.0,),
+                      _dataField(Icons.info_outline, 'Amiguinho extremamente dócil. Adora brincadeiras e também de roer seu ossinho. Excelente companhia para quem ainda não possui um animalzinho de estimação.'),
                       Divider(),
                       SizedBox(height: 10.0,),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          ButtonsHelper.roundedBtn(
-                            label: 'Ver no mapa',
-                            icon: Icons.map,
-                            size: 'md',
-                            action: () => {
-
-                            }
-                          ),
-                          SizedBox(height: 5.0),
-                          ButtonsHelper.roundedBtn(
-                            label: 'Contactar',
-                            icon: Icons.phone,
-                            size: 'md',
-                            action: () => {
-
-                            }
-                          )
-                        ],
-                      )
+                      _animalActions()
                     ],
                   ),
                 ),
@@ -156,6 +109,61 @@ class DetailsPage extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _animalName(value) {
+    return Text(
+      value,
+      textAlign: TextAlign.left,
+      style: TextStyle(
+        fontSize: 25.0,
+        fontWeight: FontWeight.bold,
+        letterSpacing: 1.0,
+      )
+    );
+  }
+
+
+  Widget _dataField(IconData icon, title) {
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Icon(icon, size: 20.0, color: Colors.grey,),
+        SizedBox(width: 5.0),
+        Flexible(
+          child: Text(
+            title,
+            style: TextStyle(
+              fontSize: 20.0
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _animalActions() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        ButtonsHelper.roundedBtn(
+          label: 'Ver no mapa',
+          icon: Icons.map,
+          size: 'md',
+          action: () => {
+
+          }
+        ),
+        SizedBox(height: 5.0),
+        ButtonsHelper.roundedBtn(
+          label: 'Contactar',
+          icon: Icons.phone,
+          size: 'md',
+          action: () => launch('tel://')
+        )
+      ],
     );
   }
 }

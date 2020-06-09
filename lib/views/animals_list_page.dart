@@ -24,9 +24,9 @@ class _AnimalsListPageState extends State<AnimalsListPage> {
 
     return DefaultPage(
       back: true,
-      search: false,
+      search: true,
       elements: widgetsList,
-      title: 'Lista',
+      title: 'Listagem',
     );
   }
 
@@ -39,6 +39,7 @@ class _AnimalsListPageState extends State<AnimalsListPage> {
 
         return ListView.builder(
           physics: NeverScrollableScrollPhysics(),
+          reverse: true,
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
           itemCount: snapshot.data.documents.length,

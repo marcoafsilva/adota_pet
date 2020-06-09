@@ -56,11 +56,19 @@ class _AnimalTileState extends State<AnimalTile> {
           topRight: Radius.circular(9.0)
         ),
         image: DecorationImage(
-          image: NetworkImage(img),
+          image: _checkUrl(img),
           fit: BoxFit.cover
         )
       ),
     );
+  }
+
+  ImageProvider _checkUrl(img) {
+    try {
+      return NetworkImage(img);
+    } catch (e) {
+      return NetworkImage('https://firebasestorage.googleapis.com/v0/b/adota-pet-e7ee5.appspot.com/o/no-image.png?alt=media&token=7e34585a-3740-4392-b07e-53f1c87bd3fa');
+    }
   }
 
   // Data widget
