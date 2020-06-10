@@ -10,12 +10,18 @@ class DefaultPage extends StatefulWidget {
   final List<Widget> elements;
   final bool back;
   final bool search;
+  final bool showSwitch;
+  final String switchUserId;
+  final bool switchStatus;
   final String title;
 
   const DefaultPage({
     this.elements,
     this.back,
     this.search = false,
+    this.showSwitch = false,
+    this.switchUserId,
+    this.switchStatus,
     this.title
   });
 
@@ -117,6 +123,19 @@ class _DefaultPageState extends State<DefaultPage> {
       onPressed: () {
         _scaffoldKey.currentState.openEndDrawer();
       },
+    );
+  }
+
+  Widget _switchBtn() {
+
+    return Switch(
+      value: widget.switchStatus,
+      onChanged: (value) {
+        setState(() {
+          // widget.switchStatus = value;
+          print(widget.switchStatus);
+        });
+      }
     );
   }
 

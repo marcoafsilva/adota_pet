@@ -3,9 +3,9 @@ import 'package:adota_pet/helpers/buttons.dart';
 import 'package:adota_pet/helpers/redirect.dart';
 import 'package:adota_pet/widgets/default_page.dart';
 import 'package:adota_pet/widgets/text_input_field.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:adota_pet/helpers/globals.dart' as globals;
 
 class SignInPage extends StatefulWidget {
@@ -53,9 +53,10 @@ class _SignInPageState extends State<SignInPage> {
             ButtonsHelper.roundedBtn(
               label: 'Entrar',
               fontSize: 20.0,
-              action: () => _loginBtn()
+              action: () {
+                _loginBtn();
+              }
             )
-            // _su(),
           ],
         ),
       ),
@@ -83,12 +84,20 @@ class _SignInPageState extends State<SignInPage> {
 
     authHandler.handleSignInEmail(
       _emailFieldController.text, _passwordFieldController.text)
-    .then((FirebaseUser user) {
+    .then((FirebaseUser user) async {
 
       if (user != null) {
-        globals.isLoggedIn = true;
-        globals.userData['uid'] = user.uid;
-        globals.userData['email'] = user.email;
+
+        Firestore.instance.collection('users').document(user.uid).get().then((value) {
+          globals.isLoggedIn = true;
+          globals.userData['uid'] = user.uid;
+          globals.userData['email'] = user.email;
+
+          globals.userData['phone'] = value.data['phone'];
+          globals.userData['name'] = value.data['name'];
+          globals.userData['city'] = value.data['city'];
+          globals.userData['state'] = value.data['state'];
+        });
 
         showDialog(
           context: context,
@@ -115,6 +124,10 @@ class _SignInPageState extends State<SignInPage> {
         globals.isLoggedIn = false;
         globals.userData['uid'] = '';
         globals.userData['email'] = 'Anônimo';
+        globals.userData['phone'] = '';
+        globals.userData['name'] = 'Anônimo';
+        globals.userData['city'] = '';
+        globals.userData['state'] = '';
 
         showDialog(
           context: context,

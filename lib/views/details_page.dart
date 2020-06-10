@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:adota_pet/helpers/globals.dart' as globals;
 import 'package:adota_pet/helpers/buttons.dart';
 import 'package:adota_pet/widgets/copyright_footer.dart';
 import 'package:adota_pet/widgets/default_page.dart';
@@ -9,7 +11,6 @@ import 'package:url_launcher/url_launcher.dart';
 class DetailsPage extends StatelessWidget {
 
   static const String routeName = '/details';
-  // final Animal animal;
   final animalId;
 
   const DetailsPage({
@@ -21,6 +22,7 @@ class DetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     Screen.keepOn(true);
+
 
     var widgetsList = <Widget> [
       _animalDetails(context),
@@ -79,15 +81,13 @@ class DetailsPage extends StatelessWidget {
                     children: <Widget>[
                       _animalName(animalData['name']),
                       SizedBox(height: 10.0,),
-                      _dataField(Icons.cake, "${animalData['age']} meses"),
-                      SizedBox(height: 10.0),
+                      _dataField(Icons.cake, "${animalData['age']}"),
                       _dataField(Icons.map, "${animalData['city']} - ${animalData['state']}"),
-                      SizedBox(height: 10.0,),
                       _dataField(Icons.color_lens, animalData['color']),
-                      SizedBox(height: 10.0,),
                       _dataField(Icons.photo_size_select_small, "Porte ${animalData['size']}"),
-                      SizedBox(height: 10.0,),
-                      _dataField(Icons.info_outline, 'Amiguinho extremamente dócil. Adora brincadeiras e também de roer seu ossinho. Excelente companhia para quem ainda não possui um animalzinho de estimação.'),
+                      _dataField(Icons.info_outline, "${animalData['history']}"),
+                      _dataField(Icons.healing, "${animalData['healthIssue']}"),
+                      _dataField(Icons.info_outline, "${animalData['adaptation']}"),
                       Divider(),
                       SizedBox(height: 10.0,),
                       _animalActions()
@@ -99,13 +99,11 @@ class DetailsPage extends StatelessWidget {
           ),
           Container(
             height: 250.0,
+            clipBehavior: Clip.antiAlias,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20.0),
-              image: DecorationImage(
-                image: NetworkImage(animalData['img']),
-                fit: BoxFit.cover
-              )
+              borderRadius: BorderRadius.circular(20.0)
             ),
+            child: SizedBox.expand(child: _checkUrl(animalData['blobImg']),),
           ),
         ],
       ),
@@ -126,22 +124,31 @@ class DetailsPage extends StatelessWidget {
 
 
   Widget _dataField(IconData icon, title) {
-    return Row(
-      mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Icon(icon, size: 20.0, color: Colors.grey,),
-        SizedBox(width: 5.0),
-        Flexible(
-          child: Text(
-            title,
-            style: TextStyle(
-              fontSize: 20.0
-            ),
+    if (title != '' && title != null && title != 'null') {
+      return Column(
+        children: <Widget>[
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Icon(icon, size: 20.0, color: Colors.grey,),
+              SizedBox(width: 5.0),
+              Flexible(
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 20.0
+                  ),
+                ),
+              ),
+            ],
           ),
-        )
-      ],
-    );
+          SizedBox(height: 10.0,)
+        ],
+      );
+    } else {
+      return SizedBox(height: 0);
+    }
   }
 
   Widget _animalActions() {
@@ -165,5 +172,16 @@ class DetailsPage extends StatelessWidget {
         )
       ],
     );
+  }
+
+  Image _checkUrl(img) {
+    try {
+      return Image.memory(
+        base64.decode(img),
+        fit: BoxFit.cover,
+      );
+    } catch (e) {
+      return Image.network('https://firebasestorage.googleapis.com/v0/b/adota-pet-e7ee5.appspot.com/o/no-image.png?alt=media&token=7e34585a-3740-4392-b07e-53f1c87bd3fa', fit: BoxFit.cover,);
+    }
   }
 }

@@ -27,11 +27,12 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   dropdownfield: 1.0.0
-  masked_text: ^0.0.6
+  flutter_masked_text: ^0.8.0
   firebase_picture_uploader: ^1.0.0+6
   firebase_storage: ^3.1.6
   firebase_auth: ^0.16.1
   url_launcher: ^5.4.10
+  image_picker: ^0.6.7+1
 
   # Cloud Firestore
   # firebase_core: ^0.2.5  # add dependency for Firebase Core

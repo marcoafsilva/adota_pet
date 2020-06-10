@@ -4,5 +4,9 @@ bool isLoggedIn = false;
 
 var userData = {
   'uid' : '',
-  'email' : 'Anônimo'
+  'email' : 'Anônimo',
+  'phone': '',
+  'name': 'Anônimo',
+  'city': '',
+  'state': ''
 };

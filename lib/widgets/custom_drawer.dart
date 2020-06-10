@@ -15,6 +15,7 @@ class CustomDrawer extends StatefulWidget {
 class _CustomDrawerState extends State<CustomDrawer> {
   @override
   Widget build(BuildContext context) {
+
     return Drawer(
       child: ListView(
         children: <Widget>[
@@ -37,7 +38,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
   }
 
   Widget _showHeader() {
-    String _userName = 'Marco Silva';
+    String _userName = globals.userData['name'];
     String _userMail = globals.userData['email'];
 
     return UserAccountsDrawerHeader(
@@ -51,11 +52,11 @@ class _CustomDrawerState extends State<CustomDrawer> {
           end: Alignment.topCenter,
         )
       ),
-      // accountName: Text(_userName),
+      accountName: Text(_userName),
       accountEmail: Text(_userMail),
       currentAccountPicture:
           CircleAvatar(
-            child: Text(_userMail.substring(0, 1).toUpperCase())
+            child: Text("${_userName.substring(0, 2).toUpperCase()}")
           ),
     );
   }
@@ -110,11 +111,15 @@ class _CustomDrawerState extends State<CustomDrawer> {
           Divider(),
           _menuItem(
             title: 'Sair',
-            action: () => {
-              globals.isLoggedIn = false,
-              globals.userData['uid'] = '',
-              globals.userData['email'] = 'Anônimo',
-              Redirect.pushUp(context)
+            action: () {
+              globals.isLoggedIn = false;
+              globals.userData['uid'] = '';
+              globals.userData['email'] = 'Anônimo';
+              globals.userData['phone'] = '';
+              globals.userData['name'] = 'Anônimo';
+              globals.userData['city'] = '';
+              globals.userData['state'] = '';
+              Redirect.pushUp(context);
             },
             icon: Icons.undo
           )

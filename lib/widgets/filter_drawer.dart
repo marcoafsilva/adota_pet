@@ -15,14 +15,14 @@ class FilterDrawer extends StatefulWidget {
 
 class _FilterDrawerState extends State<FilterDrawer> {
 
-  String _color = 'Selecione';
-  final _colors = <String>['Selecione', 'Todos', 'Branco', 'Preto', 'Caramelo', 'Mesclado'];
+  String _color = 'Cor';
+  final _colors = _animalFilters.filter['color'];
 
-  String _size = 'Selecione';
-  final _sizes = <String>['Selecione', 'Todos', 'Pequeno', 'Médio', 'Grande'];
+  String _size = 'Tamanho';
+  final _sizes = _animalFilters.filter['size'];
 
-  String _age = 'Selecione';
-  final _ages = <String>['Selecione', 'Todos', 'Filhote', 'Adulto', 'Idoso'];
+  String _age = 'Idade';
+  final _ages = _animalFilters.filter['age'];
 
   @override
   Widget build(BuildContext context) {

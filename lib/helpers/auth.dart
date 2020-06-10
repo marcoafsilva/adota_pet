@@ -28,19 +28,21 @@ class Auth {
 
       print('Ops, error!!!!!!!!!');
     }
-
-
   }
 
   Future<FirebaseUser> handleSignUp(email, password) async {
 
-    AuthResult result = await auth.createUserWithEmailAndPassword(email: email, password: password);
-    final FirebaseUser user = result.user;
+    try {
+      AuthResult result = await auth.createUserWithEmailAndPassword(email: email, password: password);
+      final FirebaseUser user = result.user;
 
-    assert (user != null);
-    assert (await user.getIdToken() != null);
+      assert (user != null);
+      assert (await user.getIdToken() != null);
 
-    return user;
+      return user;
 
+    } catch (e) {
+      print('Ops, signup error...');
+    }
   }
 }

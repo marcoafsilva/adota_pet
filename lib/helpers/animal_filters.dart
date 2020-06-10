@@ -1,5 +1,11 @@
 var filter = {
-  'color': <String>['Branco', 'Preto', 'Caramelo', 'Mesclado'],
-  'size': <String>['Pequeno', 'Médio', 'Grande'],
-  'age': <String>['Filhote', 'Adulto', 'Idoso']
+  'color': <String>['Cor', 'Branco', 'Preto', 'Caramelo', 'Mesclado'],
+  'size': <String>['Tamanho', 'Pequeno', 'Médio', 'Grande'],
+  'age': <String>['Idade', 'Filhote', 'Adulto', 'Idoso'],
+};
+
+
+var geo = {
+  'state': <String>['Estado', 'São Paulo'],
+  'city': <String>['Cidade', 'Campinas', 'Mogi Guaçu', 'Mogi Mirim', 'Itapira', 'Estiva Gerbi', 'Espírito Santo do Pinhal']
 };
