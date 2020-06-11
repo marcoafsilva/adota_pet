@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:adota_pet/helpers/globals.dart' as globals;
 import 'package:adota_pet/helpers/buttons.dart';
 import 'package:adota_pet/widgets/copyright_footer.dart';
 import 'package:adota_pet/widgets/default_page.dart';
@@ -7,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:screen/screen.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:maps_launcher/maps_launcher.dart';
 
 class DetailsPage extends StatelessWidget {
 
@@ -43,7 +43,7 @@ class DetailsPage extends StatelessWidget {
         stream: Firestore.instance.collection('animals').document(animalId).snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return new Text("Loading");
+            return new CircularProgressIndicator();
           }
 
           var animal = snapshot.data;
@@ -90,7 +90,7 @@ class DetailsPage extends StatelessWidget {
                       _dataField(Icons.info_outline, "${animalData['adaptation']}"),
                       Divider(),
                       SizedBox(height: 10.0,),
-                      _animalActions()
+                      _animalActions(animalData)
                     ],
                   ),
                 ),
@@ -151,7 +151,7 @@ class DetailsPage extends StatelessWidget {
     }
   }
 
-  Widget _animalActions() {
+  Widget _animalActions(animalData) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
@@ -159,16 +159,14 @@ class DetailsPage extends StatelessWidget {
           label: 'Ver no mapa',
           icon: Icons.map,
           size: 'md',
-          action: () => {
-
-          }
+          action: () => MapsLauncher.launchQuery("${animalData['city']} - ${animalData['state']}")
         ),
         SizedBox(height: 5.0),
         ButtonsHelper.roundedBtn(
           label: 'Contactar',
           icon: Icons.phone,
           size: 'md',
-          action: () => launch('tel://')
+          action: () => launch("tel://${animalData['phone']}")
         )
       ],
     );

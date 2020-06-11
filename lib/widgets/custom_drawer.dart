@@ -6,6 +6,7 @@ import 'package:adota_pet/views/sign_in_page.dart';
 import 'package:adota_pet/views/sign_up_page.dart';
 import 'package:flutter/material.dart';
 import 'package:adota_pet/helpers/globals.dart' as globals;
+import 'package:adota_pet/helpers/animal_filters.dart' as _f;
 
 class CustomDrawer extends StatefulWidget {
   @override
@@ -27,7 +28,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
           ),
           _menuItem(
             title: 'Animais',
-            action: () => Redirect.popUp(context, new AnimalsListPage()),
+            action: () {
+              Redirect.popUp(context, new AnimalsListPage());
+              _f.isFiltering = false;
+            },
             icon: Icons.pets
           ),
           Divider(),

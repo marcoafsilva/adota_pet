@@ -1,3 +1,4 @@
+import 'package:adota_pet/views/publish_animal.dart';
 import 'package:adota_pet/widgets/custom_drawer.dart';
 import 'package:adota_pet/widgets/filter_drawer.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ class DefaultPage extends StatefulWidget {
   final String switchUserId;
   final bool switchStatus;
   final String title;
+  final bool addAnimal;
 
   const DefaultPage({
     this.elements,
@@ -22,7 +24,8 @@ class DefaultPage extends StatefulWidget {
     this.showSwitch = false,
     this.switchUserId,
     this.switchStatus,
-    this.title
+    this.title,
+    this.addAnimal = false
   });
 
   @override
@@ -90,7 +93,7 @@ class _DefaultPageState extends State<DefaultPage> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           _menuTopBtn(),
-          (widget.search ? _filterBtn() : Text('')),
+          (widget.search ? _filterBtn() : (widget.addAnimal ? _addAnimalBtn() : SizedBox(height: 0.0, width: 0.0,))),
         ],
       ),
     );
@@ -136,6 +139,17 @@ class _DefaultPageState extends State<DefaultPage> {
           print(widget.switchStatus);
         });
       }
+    );
+  }
+
+  Widget _addAnimalBtn() {
+    return IconButton(
+      icon: Icon(
+        Icons.add,
+        color: Colors.white,
+        size: 30.0,
+      ),
+      onPressed: () => Redirect.popUp(context, new PublishAnimal())
     );
   }
 

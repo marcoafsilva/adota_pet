@@ -3,6 +3,7 @@ import 'package:adota_pet/widgets/copyright_footer.dart';
 import 'package:adota_pet/widgets/default_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:adota_pet/helpers/animal_filters.dart' as _f;
 
 class AnimalsListPage extends StatefulWidget {
 
@@ -31,11 +32,46 @@ class _AnimalsListPageState extends State<AnimalsListPage> {
   }
 
   Widget _list() {
+
+    CollectionReference c = Firestore.instance.collection('animals');
+
+    // Filter enabled animals
+    Query query = c.where(
+      "enable",
+      isEqualTo: true
+    );
+
+    if (_f.isFiltering) {
+      // Filter animal colors
+      if (_f.filteringFor.toString().contains('color')) {
+        query = query.where(
+          "color",
+          isEqualTo: _getVal('color')
+        );
+      }
+
+      // Filter animal colors
+      if (_f.filteringFor.toString().contains('age')) {
+        query = query.where(
+          "age",
+          isEqualTo: _getVal('age')
+        );
+      }
+
+      // Filter animal colors
+      if (_f.filteringFor.toString().contains('size')) {
+        query = query.where(
+          "size",
+          isEqualTo: _getVal('size')
+        );
+      }
+    }
+
     return StreamBuilder(
 
-      stream: Firestore.instance.collection('animals').snapshots(),
+      stream: query.snapshots(),
       builder: (context, snapshot) {
-        if (!snapshot.hasData) return const Text('Loading');
+        if (!snapshot.hasData) return const CircularProgressIndicator();
 
         if (snapshot.data.documents.length == 0) {
           return Padding(
@@ -87,5 +123,15 @@ class _AnimalsListPageState extends State<AnimalsListPage> {
         }
       },
     );
+  }
+
+
+  String _getVal(search) {
+
+    for (var val in _f.filteringFor) {
+      return val[search] ?? null;
+    }
+
+    // return _f.filteringFor.
   }
 }

@@ -82,7 +82,7 @@ class _PublishAnimalState extends State<PublishAnimal> {
                     "healthIssues": _animalHealthIssues.text,
                     "adaptation": _animalAdaptation.text,
                     "blobImg": base64Image,
-                    "adopted": false,
+                    "enable": true,
 
                     // User data
                     "phone": globals.userData['phone'],

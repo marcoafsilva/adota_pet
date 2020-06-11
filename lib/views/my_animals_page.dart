@@ -23,6 +23,7 @@ class _MyAnimalsPageState extends State<MyAnimalsPage> {
       search: false,
       elements: widgetsList,
       title: 'Meus Animais',
+      addAnimal: true,
     );
   }
 
@@ -34,7 +35,7 @@ class _MyAnimalsPageState extends State<MyAnimalsPage> {
         isEqualTo: globals.userData['uid']
       ).snapshots(),
       builder: (context, snapshot) {
-        if (!snapshot.hasData) return const Text('Loading');
+        if (!snapshot.hasData) return const CircularProgressIndicator();
 
         if (snapshot.data.documents.length == 0) {
           return Padding(

@@ -1,11 +1,6 @@
 import 'package:adota_pet/helpers/redirect.dart';
 import 'package:adota_pet/views/animals_list_page.dart';
-import 'package:adota_pet/views/my_animals_page.dart';
-import 'package:adota_pet/views/root_page.dart';
-import 'package:adota_pet/views/sign_in_page.dart';
-import 'package:adota_pet/views/sign_up_page.dart';
 import 'package:flutter/material.dart';
-import 'package:adota_pet/helpers/globals.dart' as globals;
 import 'package:adota_pet/helpers/animal_filters.dart' as _animalFilters;
 
 class FilterDrawer extends StatefulWidget {
@@ -16,13 +11,8 @@ class FilterDrawer extends StatefulWidget {
 class _FilterDrawerState extends State<FilterDrawer> {
 
   String _color = 'Cor';
-  final _colors = _animalFilters.filter['color'];
-
   String _size = 'Tamanho';
-  final _sizes = _animalFilters.filter['size'];
-
   String _age = 'Idade';
-  final _ages = _animalFilters.filter['age'];
 
   @override
   Widget build(BuildContext context) {
@@ -33,16 +23,38 @@ class _FilterDrawerState extends State<FilterDrawer> {
         children: <Widget>[
           _title(),
           Divider(),
-          _filter('Cor: ', _color, _colors),
-          _filter('Idade: ', _age, _ages),
-          _filter('Tamanho: ', _size, _sizes),
+          _filter('Cor: ', _color, _animalFilters.filter['color']),
+          _filter('Idade: ', _age, _animalFilters.filter['age']),
+          _filter('Tamanho: ', _size, _animalFilters.filter['size']),
           Divider(),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: RaisedButton(
               child: Text('Filtrar'),
               onPressed: () {
+                if (_animalFilters.filteringFor != null) {
+                  _animalFilters.filteringFor.clear();
+                  _animalFilters.isFiltering = false;
+                }
 
+                if (_color != "Cor") {
+                  _animalFilters.filteringFor.add({'color': _color});
+                  _animalFilters.isFiltering = true;
+                }
+
+                if (_age != "Idade") {
+                  _animalFilters.filteringFor.add({'age': _age});
+                  _animalFilters.isFiltering = true;
+                }
+
+                if (_size != "Tamanho") {
+                  _animalFilters.filteringFor.add({'size': _size});
+                  _animalFilters.isFiltering = true;
+                }
+
+                Redirect.pushUp(context);
+                Redirect.pushUp(context);
+                Redirect.popUp(context, new AnimalsListPage());
               },
             ),
           )

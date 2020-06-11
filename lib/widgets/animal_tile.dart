@@ -21,6 +21,14 @@ class AnimalTile extends StatefulWidget {
 
 class _AnimalTileState extends State<AnimalTile> {
 
+  bool switchStatus;
+
+  @override
+  void initState() {
+    switchStatus = (widget.animal['enable'] == 'true');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -120,40 +128,55 @@ class _AnimalTileState extends State<AnimalTile> {
 
   Widget _switch() {
 
-    bool switchStatus = widget.animal['adopted'] == 'true';
+    return Tooltip(
+      message: 'Alterar status',
+      preferBelow: false,
+      child: Switch(
+        value: switchStatus,
+        onChanged: (bool newValue) {
+          // print(value);
+          setState(() {
+            switchStatus = newValue;
+          });
+          _dialog(newValue);
+        },
+      ),
+    );
+  }
 
-    return Switch(
-      value: switchStatus,
-      onChanged: (value) {
-        print(value);
-        setState(() {
-          // switchStatus = value;
-        });
-        return;
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text('Alterar status'),
-              content: Text('Você realmente deseja alterar o status deste animal?'),
-              actions: [
-                FlatButton(
-                  child: Text('Sim'),
-                  onPressed: () {
+  Widget _dialog(newValue) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
 
-                  },
-                ),
-                FlatButton(
-                  child: Text('Não'),
-                  onPressed: () {
+        return AlertDialog(
+          title: Text('Alterar status'),
+          content: Text('Você realmente deseja alterar o status deste animal?'),
+          actions: [
+            FlatButton(
+              child: Text('Sim'),
+              onPressed: () {
 
-                  },
-                )
-              ],
-            );
-          }
+                Firestore.instance.collection('animals').document(widget.animal.documentID).updateData({
+                  "enable": newValue
+                });
+
+                Redirect.pushUp(context);
+              },
+            ),
+            FlatButton(
+              child: Text('Não'),
+              onPressed: () {
+                setState(() {
+                  switchStatus = !newValue;
+                });
+                Redirect.pushUp(context);
+              },
+            )
+          ],
         );
-      },
+      }
     );
   }
 }

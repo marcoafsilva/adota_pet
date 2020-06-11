@@ -10,6 +10,7 @@ import 'package:adota_pet/widgets/default_page.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:adota_pet/helpers/globals.dart' as globals;
+import 'package:adota_pet/helpers/animal_filters.dart' as _f;
 
 class RootPage extends StatefulWidget {
 
@@ -74,6 +75,7 @@ class _RootPageState extends State<RootPage> {
               color: Colors.white
             ),
             onTap: () {
+              _f.isFiltering = false;
               Redirect.popUp(context, new AnimalsListPage());
             },
           )
@@ -86,9 +88,12 @@ class _RootPageState extends State<RootPage> {
   Widget _trendingVerticalList(context) {
     return StreamBuilder(
 
-      stream: Firestore.instance.collection('animals').snapshots(),
+      stream: Firestore.instance.collection('animals').where(
+        "enable",
+        isEqualTo: true
+      ).snapshots(),
       builder: (context, snapshot) {
-        if (!snapshot.hasData) return const Text('Loading');
+        if (!snapshot.hasData) return const CircularProgressIndicator();
 
         var resultLength = snapshot.data.documents.length;
 
